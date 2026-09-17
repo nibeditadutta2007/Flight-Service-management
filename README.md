@@ -12,7 +12,7 @@
 
 
     ## DB Design
-      -Airplane Table
+      -Airplane Table 
       -Flight
       -Airport
       -city
