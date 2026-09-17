@@ -8,11 +8,12 @@ export async function createCityHandler(req, res){
     }
 }
 
-export async function getCitiesHandler( req, res){
-    try {
+export async function getCitiesHandler(req, res) {
+  try {
     const cities = await listCities();
     res.status(200).json({ success: true, data: cities });
   } catch (err) {
+    console.error(err);  
     res.status(500).json({ success: false, message: err.message });
   }
 }
