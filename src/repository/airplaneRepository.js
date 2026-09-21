@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 
 export async function createAirplane(data) {
   try {
-    const [airplane] = await db.insert(airplanes).values(data).returning();
+    const airplane = await db.insert(airplanes).values(data).returning();
     return airplane;
   } catch (error) {
     console.error("Error in createAirplane:", error.message);
@@ -23,7 +23,7 @@ export async function getAllAirplanes() {
 
 export async function getAirplaneById(id) {
   try {
-    const [airplane] = await db.select().from(airplanes).where(eq(airplanes.id, id));
+    const airplane = await db.select().from(airplanes).where(eq(airplanes.id, id));
     return airplane;
   } catch (error) {
     console.error("Error in getAirplaneById:", error.message);
@@ -33,7 +33,7 @@ export async function getAirplaneById(id) {
 
 export async function updateAirplane(id, data) {
   try {
-    const [airplane] = await db.update(airplanes).set(data).where(eq(airplanes.id, id)).returning();
+    const airplane = await db.update(airplanes).set(data).where(eq(airplanes.id, id)).returning();
     return airplane;
   } catch (error) {
     console.error("Error in updateAirplane:", error.message);
@@ -43,7 +43,7 @@ export async function updateAirplane(id, data) {
 
 export async function deleteAirplane(id) {
   try {
-    const [airplane] = await db.delete(airplanes).where(eq(airplanes.id, id)).returning();
+    const airplane = await db.delete(airplanes).where(eq(airplanes.id, id)).returning();
     return airplane;
   } catch (error) {
     console.error("Error in deleteAirplane:", error.message);
