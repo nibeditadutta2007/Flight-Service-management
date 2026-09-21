@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 
 export async function createAirport(data) {
   try {
-    const [airport] = await db.insert(airports).values(data).returning();
+    const airport = await db.insert(airports).values(data).returning();
     return airport;
   } catch (error) {
     console.error("Error in createAirport:", error.message);
@@ -23,7 +23,7 @@ export async function getAllAirports() {
 
 export async function getAirportById(id) {
   try {
-    const [airport] = await db.select().from(airports).where(eq(airports.id, id));
+    const airport = await db.select().from(airports).where(eq(airports.id, id));
     return airport;
   } catch (error) {
     console.error("Error in getAirportById:", error.message);
@@ -33,7 +33,7 @@ export async function getAirportById(id) {
 
 export async function updateAirport(id, data) {
   try {
-    const [airport] = await db.update(airports).set(data).where(eq(airports.id, id)).returning();
+    const airport = await db.update(airports).set(data).where(eq(airports.id, id)).returning();
     return airport;
   } catch (error) {
     console.error("Error in updateAirport:", error.message);
@@ -43,7 +43,7 @@ export async function updateAirport(id, data) {
 
 export async function deleteAirport(id) {
   try {
-    const [airport] = await db.delete(airports).where(eq(airports.id, id)).returning();
+    const airport = await db.delete(airports).where(eq(airports.id, id)).returning();
     return airport;
   } catch (error) {
     console.error("Error in deleteAirport:", error.message);
