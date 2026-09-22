@@ -11,7 +11,7 @@ export async function createFlightHandler(req, res) {
 
 export async function getFlightsHandler(req, res) {
   try {
-    const flights = await listFlights();
+    const flights = await listFlights(req.query);
     res.status(200).json({ success: true, data: flights });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

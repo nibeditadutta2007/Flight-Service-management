@@ -1,9 +1,13 @@
 import { createFlight, getAllFlights, getFlightById, updateFlight, deleteFlight } from "../repository/flightRepository.js";
+import { compareTime } from "../utils/helper.js";
 
 export async function addFlight(data) {
   try {
     if (!data.flightNumber || !data.airplaneId || !data.airportId || !data.departureTime || !data.arrivalTime) {
       throw new Error("flightNumber, airplaneId, airportId, departureTime, and arrivalTime are required");
+    }
+    if (!compareTime(data.arrivalTime, data.departureTime)) {
+      throw new Error("Arrival time must be after departure time");
     }
     return await createFlight(data);
   } catch (error) {
@@ -12,9 +16,9 @@ export async function addFlight(data) {
   }
 }
 
-export async function listFlights() {
+export async function listFlights(filter) {
   try {
-    return await getAllFlights();
+    return await getAllFlights(filter);
   } catch (error) {
     console.error("Error in listFlights:", error.message);
     throw error;
