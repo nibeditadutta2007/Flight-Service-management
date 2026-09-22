@@ -2,12 +2,12 @@ import { addAirplane, listAirplanes, fetchAirplaneById, editAirplane, removeAirp
 export async function createAirplaneHandler(req, res){
     try{
         const airplane = await addAirplane(req.body);
-        res.status(201).json({
+        return res.status(201).json({
             success : true,
             data: airplane
         });
     } catch (error){
-        res.status(400).json({
+        return res.status(400).json({
             success: false,
             message: error.message 
         });
@@ -32,12 +32,12 @@ export async function getAirplanesHandler(req, res){
 export async function updateAirplaneHandler(req,res){
     try{
         const airplane = await editAirplane(Number(req.params.id), req.body);
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             data: airplane
         });
     }catch (error){
-        res.status(404).json({
+       return  res.status(404).json({
             success: false,  
             message : error.message
         });
@@ -47,17 +47,17 @@ export async function updateAirplaneHandler(req,res){
 export async function deleteAirplaneHandler(req, res) {
   try {
     const airplane = await removeAirplane(Number(req.params.id));
-    res.status(200).json({ success: true, data: airplane });
+    return res.status(200).json({ success: true, data: airplane });
   } catch (err) {
-    res.status(404).json({ success: false, message: err.message });
+   return  res.status(404).json({ success: false, message: err.message });
   }
 }
 
 export async function getAirplaneByIdHandler(req, res) {
   try {
     const airplane = await fetchAirplaneById(Number(req.params.id));
-    res.status(200).json({ success: true, data: airplane });
+    return res.status(200).json({ success: true, data: airplane });
   } catch (error) {
-    res.status(404).json({ success: false, message: error.message });
+    return res.status(404).json({ success: false, message: error.message });
   }
 }

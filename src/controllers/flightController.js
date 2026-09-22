@@ -5,7 +5,7 @@ export async function createFlightHandler(req, res) {
     const flight = await addFlight(req.body);
     return res.status(201).json({ success: true, data: flight });
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+    return res.status(400).json({ success: false, message: error.message });
   }
 }
 
@@ -14,7 +14,7 @@ export async function getFlightsHandler(req, res) {
     const flights = await listFlights(req.query);
     return res.status(200).json({ success: true, data: flights });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    return  res.status(500).json({ success: false, message: error.message });
   }
 }
 
@@ -23,7 +23,7 @@ export async function getFlightByIdHandler(req, res) {
     const flight = await fetchFlightById(Number(req.params.id));
     return res.status(200).json({ success: true, data: flight });
   } catch (error) {
-    res.status(404).json({ success: false, message: error.message });
+    return res.status(404).json({ success: false, message: error.message });
   }
 }
 
@@ -32,7 +32,7 @@ export async function updateFlightHandler(req, res) {
     const flight = await editFlight(Number(req.params.id), req.body);
     return res.status(200).json({ success: true, data: flight });
   } catch (error) {
-    res.status(404).json({ success: false, message: error.message });
+    return res.status(404).json({ success: false, message: error.message });
   }
 }
 
@@ -41,6 +41,6 @@ export async function deleteFlightHandler(req, res) {
     const flight = await removeFlight(Number(req.params.id));
     return res.status(200).json({ success: true, data: flight });
   } catch (error) {
-    res.status(404).json({ success: false, message: error.message });
+    return res.status(404).json({ success: false, message: error.message });
   }
 }
